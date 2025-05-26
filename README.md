@@ -12,7 +12,7 @@ The objective of this task was to scan the local network to:
 ## 2. 🛠️ Tools Used
 
 - **Nmap** — For performing TCP SYN scans to detect open ports.
-- **Wireshark (Optional)** — For capturing and analyzing network packets.
+- **Wireshark** — For capturing and analyzing network packets.
 
 ---
 
