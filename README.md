@@ -1,84 +1,79 @@
 # CYBER-SECURITY-INTERNSHIP
 Task 1 Report: Local Network Port Scan
-1. Objective
-The objective of this task was to scan the local network to discover open ports on devices, understand network exposure, and identify potential security risks associated with the open ports.
-2. Tools Used
-Nmap — Network scanning tool to perform TCP SYN scan.
+## 1. 🎯 Objective
 
-Wireshark (optional) — Packet capture and analysis tool.
+The objective of this task was to scan the local network to:
+- Discover live hosts and open ports.
+- Understand the network exposure.
+- Identify potential security risks associated with open ports.
+
+---
+
+## 2. 🛠️ Tools Used
+
+- **Nmap** — For performing TCP SYN scans to detect open ports.
+- **Wireshark (Optional)** — For capturing and analyzing network packets.
+
+---
+
+## 3. 🖥️ Environment
+
+- **Operating System:** Kali Linux (Bridged Network Mode)
+- **Network Interface:** `eth0`
+- **Local IP Address:** `192.168.173.195/24`
+- **Network Scanned:** `192.168.173.0/24`
+
+---
+
+## 4. 🔍 Methodology
+
+1. Identified local IP and subnet using the `ip a` command.
+2. Ran a TCP SYN scan using the command:
+   ```bash
+   nmap -sS 192.168.173.0/24 -oN local-scan2.txt
+3. (Optional) Captured packets using Wireshark on interface eth0.
+
+4. Analyzed Nmap results to identify open ports and services.
+
+5. Reviewed potential security risks associated with those ports.
+
+5. 📄 Scan Results
+Total IPs scanned: 256 (192.168.173.0 – 192.168.173.255)
+Live hosts detected: 4
+
+IP Address	Status	Open Ports	Service	MAC Address	Device Info
+192.168.173.95	Host is up	None	—	A8:41:F4:66:5F:BD	AzureWave Technology
+192.168.173.126	Host is up	None	—	B8:B1:EA:64:16:B1	Honor Device
+192.168.173.227	Host is up	53/tcp	DNS	D2:56:9A:C7:9C:36	Unknown
+192.168.173.195	Host is up	None	—	—	Kali (local machine)
+
+6. 🔎 Analysis
+Port 53 (DNS) is open on 192.168.173.227, which may indicate a running DNS server.
+
+Other hosts had all ports either closed or filtered:
+
+Closed: Host responded with TCP RST.
+
+Filtered: No response, likely due to firewall rules or stealth mode.
+
+Your Kali Linux machine has no open ports, reducing its network exposure.
+
+Wireshark confirmed the sending of SYN packets and observed RST/no-responses, supporting the Nmap findings.
+
+7. 🚨 Common Ports and Their Risks
+Port	Service	Common Security Risks
+22	SSH	Brute-force attacks, weak passwords, open root access
+53	DNS	DNS poisoning, amplification attacks
+80/443	HTTP/HTTPS	Outdated CMS, unpatched web servers
+445	SMB	EternalBlue, remote code execution
+3306	MySQL	Exposed databases, weak authentication
+
+8. ✅ Conclusion
+The scan successfully identified 4 live hosts, including one with an open TCP port (53).
+
+The network appears to be partially exposed, depending on how DNS is configured on the host at 192.168.173.227.
+
+No open ports were found on your scanning machine, which is a good security practice.
 
 
-3. Environment
-Operating System: Kali Linux (running in bridged mode)
 
-Network Interface: eth0
-
-Local IP: 192.168.67.195/24
-
-Network Range Scanned: 192.168.67.0/24
-
-
-4. Methodology
-Identified the local network IP range using ip a command.
-
-Ran the Nmap TCP SYN scan with the command:
-nmap -sS 192.168.67.0/24 -oN local-scan.txt
-
-Captured network packets during the scan using Wireshark on interface eth0.
-
-Analyzed open ports and services found.
-
-Researched common services running on those ports and potential security risks.
-
-
-5. Scan Results
-Total IPs scanned: 256 (192.168.67.0 to 192.168.67.255)
-
-Hosts up: 1 (the scanning host itself at 192.168.67.195)
-
-Open ports found: None on the scanning host.
-
-Nmap scan report for 192.168.67.195
-Host is up (0.0000030s latency).
-All 1000 scanned ports on 192.168.67.195 are closed.
-
-
-No other hosts responded to the scan on this subnet.
-
-Wireshark capture showed outgoing SYN packets to scanned IPs, with RST responses indicating closed ports.
-
-
-6. Analysis
-The scan host (192.168.67.195) has no open TCP ports in the scanned range.
-
-No other devices on the network responded, likely due to:
-
-Network client isolation or firewall restrictions.
-
-Other devices may have host-based firewalls blocking probes.
-
-Possible network segmentation.
-
-The absence of open ports reduces the immediate risk of remote network attacks on this host.
-
-Common ports typically scanned (22, 80, 443, etc.) were closed, indicating limited network exposure.
-
-7. Common Services and Security Risks (If Ports Were Open)
-Port    Service Common Risks
-22      SSH     Weak passwords, open root login
-80/443  HTTP/HTTPS      Outdated software, unpatched vulnerabilities
-445     SMB     Exploitable vulnerabilities (e.g., EternalBlue)
-3306    MySQL   Weak authentication, exposed databases
-
-
-
-8. Conclusion
-This scan demonstrated the use of Nmap to enumerate network hosts and open ports. The network shows limited exposure, with no open ports detected on the scanning host and no visible devices on the subnet.
-
-Further steps could include:
-
-Verifying network isolation or firewall policies.
-
-Scanning during different network conditions.
-
-Expanding to UDP scans or vulnerability scanning tools.
