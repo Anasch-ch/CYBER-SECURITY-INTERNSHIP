@@ -37,7 +37,9 @@ The objective of this task was to scan the local network to:
 
 5. Reviewed potential security risks associated with those ports.
 
-5. 📄 Scan Results
+
+
+##5. 📄 Scan Results
 Total IPs scanned: 256 (192.168.173.0 – 192.168.173.255)
 Live hosts detected: 4
 
