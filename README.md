@@ -49,7 +49,7 @@ IP Address	Status	Open Ports	Service	MAC Address	Device Info
 192.168.173.227	Host is up	53/tcp	DNS	D2:56:9A:C7:9C:36	Unknown
 192.168.173.195	Host is up	None	—	—	Kali (local machine)
 
-6. 🔎 Analysis
+##  6. 🔎 Analysis
 Port 53 (DNS) is open on 192.168.173.227, which may indicate a running DNS server.
 
 Other hosts had all ports either closed or filtered:
@@ -62,7 +62,7 @@ Your Kali Linux machine has no open ports, reducing its network exposure.
 
 Wireshark confirmed the sending of SYN packets and observed RST/no-responses, supporting the Nmap findings.
 
-7. 🚨 Common Ports and Their Risks
+##  7. 🚨 Common Ports and Their Risks
 Port	Service	Common Security Risks
 22	SSH	Brute-force attacks, weak passwords, open root access
 53	DNS	DNS poisoning, amplification attacks
@@ -70,7 +70,7 @@ Port	Service	Common Security Risks
 445	SMB	EternalBlue, remote code execution
 3306	MySQL	Exposed databases, weak authentication
 
-8. ✅ Conclusion
+##  8. ✅ Conclusion
 The scan successfully identified 4 live hosts, including one with an open TCP port (53).
 
 The network appears to be partially exposed, depending on how DNS is configured on the host at 192.168.173.227.
